@@ -38,4 +38,4 @@ if prompt := st.chat_input("What can I help you today?"):
     # session state.
     with st.chat_message("assistant"):
         response = st.write_stream(stream)
-    st.session_state.messages.append({"role": "assistant", "content": response.text})
+    st.session_state.messages.append({"role": "assistant", "content": response})
