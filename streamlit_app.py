@@ -2,6 +2,7 @@ import streamlit as st
 from openai import OpenAI
 import requests
 import json
+import time
 
 # Show title and description.
 st.title("💬 Ragooon Chatbot")
