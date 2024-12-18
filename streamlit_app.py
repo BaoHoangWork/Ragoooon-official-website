@@ -1,6 +1,7 @@
 import streamlit as st
 from openai import OpenAI
 import requests
+import json
 
 # Show title and description.
 st.title("💬 Ragooon Chatbot")
@@ -28,10 +29,11 @@ if prompt := st.chat_input("What can I help you today?"):
         st.markdown(prompt)
 
     url = 'https://ragoooon.onrender.com/complete'
+    headers = {"Content-Type": "application/json; charset=utf-8"}
     myobj = {"prompt": {prompt},"history": []}
-    stream = requests.post(url, data = myobj)
+    stream = requests.post(url, json = myobj, headers=headers)
 
-    st.write(stream.status_code)
+    st.write(stream.json())
 
     # Stream the response to the chat using `st.write_stream`, then store it in 
     # session state.
