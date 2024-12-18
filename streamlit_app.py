@@ -34,6 +34,14 @@ if prompt := st.chat_input("What can I help you today?"):
     
     # Stream the response to the chat using `st.write_stream`, then store it in 
     # session state.
+
+    st.write(stream.json()['stream'])
+    
+    def stream_data():
+        for word in stream.json()['stream']:
+            yield word + " "
+            time.sleep(0.02)
+    
     with st.chat_message("assistant"):
         response = st.write_stream(stream.json()['stream'])
     st.session_state.messages.append({"role": "assistant", "content": response})
