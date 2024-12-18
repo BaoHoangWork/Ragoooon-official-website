@@ -26,6 +26,7 @@ if prompt := st.chat_input("What can I help you today?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
+        st.write(prompt)
 
     url = 'https://ragoooon.onrender.com/complete'
     myobj = {
@@ -34,8 +35,11 @@ if prompt := st.chat_input("What can I help you today?"):
     }
     stream = requests.post(url, data = myobj)
 
+    st.write(stream)
+
     # Stream the response to the chat using `st.write_stream`, then store it in 
     # session state.
     with st.chat_message("assistant"):
         response = st.write_stream(stream)
+        st.write(response)
     st.session_state.messages.append({"role": "assistant", "content": response})
