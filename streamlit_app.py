@@ -33,7 +33,7 @@ if prompt := st.chat_input("What can I help you today?"):
     myobj = {"prompt": {prompt},"history": []}
     stream = requests.post(url, json = myobj, headers=headers)
 
-    st.write(stream.json())
+    st.write(stream)
 
     # Stream the response to the chat using `st.write_stream`, then store it in 
     # session state.
