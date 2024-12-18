@@ -38,5 +38,5 @@ if prompt := st.chat_input("What can I help you today?"):
     # session state.
     with st.chat_message("assistant"):
         response = st.write_stream(stream.json())
-        st.write(response.text)
-    st.session_state.messages.append({"role": "assistant", "content": response.text})
+        st.write(response)
+    st.session_state.messages.append({"role": "assistant", "content": response})
