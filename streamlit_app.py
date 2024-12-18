@@ -31,7 +31,7 @@ if prompt := st.chat_input("What can I help you today?"):
     url = 'https://ragoooon.onrender.com/complete'
     headers = {"Content-Type": "application/json; charset=utf-8"}
     myobj = {"prompt": {prompt},"history": []}
-    stream = requests.post(url, json = myobj, headers=headers)
+    stream = requests.post(url, data = myobj, headers=headers)
 
     st.write(stream)
 
