@@ -28,7 +28,7 @@ if prompt := st.chat_input("What can I help you today?"):
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    url = 'https://ragoooon.onrender.com/complete'
+    url = 'https://ragoooon.onrender.com/stream_complete'
     myobj = {"prompt": prompt,"history": []}
     stream = requests.post(url, json = myobj)
 
