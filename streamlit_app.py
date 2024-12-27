@@ -29,7 +29,7 @@ with tab1:
     
     # Create a chat input field to allow the user to enter a message. This will display
     # automatically at the bottom of the page.
-    if prompt := st.chat_input("What can I help you today?"):
+    if prompt := st.chat_input("What can I help you today?", key=1):
     
         # Store and display the current prompt.
         st.session_state.messages.append({"role": "user", "content": prompt})
@@ -72,7 +72,7 @@ with tab2:
     
     # Create a chat input field to allow the user to enter a message. This will display
     # automatically at the bottom of the page.
-    if prompt1 := st.chat_input("What can I help you today?"):
+    if prompt1 := st.chat_input("What can I help you today?", key=2):
     
         # Store and display the current prompt.
         st.session_state.messages1.append({"role": "user", "content": prompt1})
