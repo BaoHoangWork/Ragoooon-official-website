@@ -72,15 +72,15 @@ with tab2:
     
     # Create a chat input field to allow the user to enter a message. This will display
     # automatically at the bottom of the page.
-    if prompt := st.chat_input("What can I help you today?"):
+    if prompt1 := st.chat_input("What can I help you today?"):
     
         # Store and display the current prompt.
-        st.session_state.messages1.append({"role": "user", "content": prompt})
+        st.session_state.messages1.append({"role": "user", "content": prompt1})
         with st.chat_message1("user"):
-            st.markdown(prompt)
+            st.markdown(prompt1)
     
         url = 'https://ragoooon.onrender.com/stream_complete'
-        myobj = {"prompt": prompt,"history": []}
+        myobj = {"prompt": prompt1,"history": []}
         stream = requests.post(url, json = myobj)
         
         # Stream the response to the chat using `st.write_stream`, then store it in 
