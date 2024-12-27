@@ -7,7 +7,7 @@ import time
 # Show title and description.
 st.title("💬 Ragooon Chatbot")
 st.write(
-    "API for RagoonBot, a custom LLM model version 0.1"
+    "API for RagoonBot, a custom snowflake mistral model version 0.1"
 )
     
 # Create a session state variable to store the chat messages. This ensures that the
