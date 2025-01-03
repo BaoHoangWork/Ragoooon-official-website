@@ -123,7 +123,7 @@ with tab3:
             st.markdown(prompt2)
     
         url = 'https://ragoooon.onrender.com/stream_complete'
-        myobj = {"prompt": prompt2, "history": st.session_state.messages2}
+        myobj = {"prompt": prompt2, "history": []}
         stream = requests.post(url, json = myobj)
         
         # Stream the response to the chat using `st.write_stream`, then store it in 
