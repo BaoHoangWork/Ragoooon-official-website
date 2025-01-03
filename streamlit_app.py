@@ -122,7 +122,7 @@ with tab3:
         with st.chat_message("user"):
             st.markdown(prompt2)
     
-        url = 'https://ragoooon.onrender.com/chat_complete'
+        url = 'https://ragoooon.onrender.com/stream_chat'
         myobj = {"prompt": prompt2, "history": st.session_state.messages2}
         stream = requests.post(url, json = myobj)
         
