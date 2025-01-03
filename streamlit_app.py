@@ -27,7 +27,7 @@ with tab1:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
-    input_container = st.empty()
+    input_container = st.container()
 
     with input_container:
     # Create a chat input field to allow the user to enter a message. This will display
@@ -54,9 +54,6 @@ with tab1:
             with st.chat_message("assistant"):
                 response = st.write_stream(stream_data)
             st.session_state.messages.append({"role": "assistant", "content": response})
-            
-    # Keep the input field at the bottom of the page.
-    input_container.markdown(" ")  
     
 # TESTING AI TAB
 with tab2:
