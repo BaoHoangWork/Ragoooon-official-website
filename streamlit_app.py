@@ -7,7 +7,7 @@ import time
 st.title("💬 Ragooon")
 
 # tab setups
-tab1, tab2 = st.tabs(["Snowflake Mistral AI", "Testing AI"])
+tab1, tab2, tab3 = st.tabs(["Snowflake Mistral AI /stream_complete", "Testing AI", "/stream_chat"])
 
 # SNOWFLAKE MISTRAL TAB
 with tab1:
@@ -76,7 +76,7 @@ with tab2:
     
         # Store and display the current prompt.
         st.session_state.messages1.append({"role": "user", "content": prompt1})
-        with st.chat_message1("user"):
+        with st.chat_message("user"):
             st.markdown(prompt1)
     
         url = 'https://ragoooon.onrender.com/stream_complete'
@@ -94,3 +94,46 @@ with tab2:
         with st.chat_message("assistant"):
             response = st.write_stream(stream_data)
         st.session_state.messages1.append({"role": "assistant", "content": response})
+
+# /stream_chat
+with tab3:
+    # Show title and description.
+    st.title("💬 /stream_chat API")
+    st.write(
+        "API for RagoonBot, a testing model"
+    )
+        
+    # Create a session state variable to store the chat messages. This ensures that the
+    # messages persist across reruns.
+    if "messages2" not in st.session_state:
+        st.session_state.messages2 = []
+    
+    # Display the existing chat messages via `st.chat_message`.
+    for message2 in st.session_state.messages2:
+        with st.chat_message(message2["role"]):
+            st.markdown(message2["content"])
+    
+    # Create a chat input field to allow the user to enter a message. This will display
+    # automatically at the bottom of the page.
+    if prompt2 := st.chat_input("What can I help you today?", key=3):
+    
+        # Store and display the current prompt.
+        st.session_state.messages2.append({"role": "user", "content": prompt2})
+        with st.chat_message("user"):
+            st.markdown(prompt1)
+    
+        url = 'https://ragoooon.onrender.com/stream_complete'
+        myobj = {"prompt": prompt2,"history": st.session_state.messages2}
+        stream = requests.post(url, json = myobj)
+        
+        # Stream the response to the chat using `st.write_stream`, then store it in 
+        # session state.
+        
+        def stream_data():
+            for word in stream.json()['stream']:
+                yield word
+                time.sleep(0.02)
+        
+        with st.chat_message("assistant"):
+            response = st.write_stream(stream_data)
+        st.session_state.messages2.append({"role": "assistant", "content": response})
