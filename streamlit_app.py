@@ -21,13 +21,15 @@ with tab1:
     # messages persist across reruns.
     if "messages" not in st.session_state:
         st.session_state.messages = []
-    
-    # Display the existing chat messages via `st.chat_message`.
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
 
-    input_container = st.container()
+    # Display existing chat messages.
+    chat_container = st.container()  # Create a container for the chat history.
+    with chat_container:
+        for message in st.session_state.messages:
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
+
+    input_container = st.empty()
 
     with input_container:
     # Create a chat input field to allow the user to enter a message. This will display
