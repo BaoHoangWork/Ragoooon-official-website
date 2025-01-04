@@ -6,6 +6,7 @@ import time
 from streamlit_float import *
 
 st.title("💬 Ragooon")
+float_init(theme=True, include_unstable_primary=False)
 
 # tab setups
 tab1, tab2, tab3 = st.tabs(["Snowflake Mistral AI /stream_complete", "Testing AI", "/stream_chat"])
