@@ -37,9 +37,9 @@ with tab1:
         if prompt := st.chat_input("What can I help you today?", key=1):
         
             # Store and display the current prompt.
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            with st.chat_message("user"):
-                st.markdown(prompt)
+            # st.session_state.messages.append({"role": "user", "content": prompt})
+            # with st.chat_message("user"):
+            #     st.markdown(prompt)
         
             url = 'https://ragoooon.onrender.com/stream_complete'
             myobj = {"prompt": prompt,"history": []}
