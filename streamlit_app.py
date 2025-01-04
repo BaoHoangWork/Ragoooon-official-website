@@ -20,6 +20,9 @@ with tab1:
 
     def chat_content():
         st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
+            st.write(3)
         st.write(5)
     
     # Create a session state variable to store the chat messages. This ensures that the
@@ -44,11 +47,6 @@ with tab1:
     
     if prompt:
         st.write(2)
-        with st.chat_message("user"):
-            st.markdown(prompt)
-            st.write(3)
-
-        st.write(4)
         url = 'https://ragoooon.onrender.com/stream_complete'
         myobj = {"prompt": prompt,"history": []}
         stream = requests.post(url, json = myobj)
