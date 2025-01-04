@@ -18,12 +18,12 @@ with tab1:
     "API for RagoonBot, a custom snowflake mistral model version 0.1"
     )
 
-    def chat_content():
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.markdown(prompt)
-            st.write(3)
-        st.write(5)
+    # def chat_content():
+    #     st.session_state.messages.append({"role": "user", "content": prompt})
+    #     with st.chat_message("user"):
+    #         st.markdown(prompt)
+    #         st.write(3)
+    #     st.write(5)
     
     # Create a session state variable to store the chat messages. This ensures that the
     # messages persist across reruns.
@@ -36,7 +36,7 @@ with tab1:
             st.markdown(message["content"])
         
     with st.container():
-        prompt = st.chat_input(placeholder='What can I help you today?', on_submit=chat_content, key=1) 
+        prompt = st.chat_input(placeholder='What can I help you today?', key=1) 
         st.write(1)
         button_b_pos = "1rem"
         button_css = float_css_helper(width="2.2rem", bottom=button_b_pos, transition=0)
@@ -46,6 +46,11 @@ with tab1:
     st.write(prompt)
     
     if prompt:
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
+            st.write(3)
+            
         st.write(2)
         url = 'https://ragoooon.onrender.com/stream_complete'
         myobj = {"prompt": prompt,"history": []}
