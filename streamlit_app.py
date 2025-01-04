@@ -73,8 +73,7 @@ with tab2:
             st.markdown(message1["content"])
 
     with st.container():
-        prompt1 = st.chat_input(placeholder='What can I help you today?', key=2) 
-        st.write(1)
+        prompt1 = st.chat_input(placeholder='What can I help you today?', key=2)
         button_b_pos = "1rem"
         button_css = float_css_helper(width="2.2rem", bottom=button_b_pos, transition=0)
         float_parent(css=button_css)
@@ -121,7 +120,6 @@ with tab3:
 
     with st.container():
         prompt2 = st.chat_input(placeholder='What can I help you today?', key=3) 
-        st.write(1)
         button_b_pos = "1rem"
         button_css = float_css_helper(width="2.2rem", bottom=button_b_pos, transition=0)
         float_parent(css=button_css)
