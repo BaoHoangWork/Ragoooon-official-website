@@ -20,6 +20,7 @@ with tab1:
 
     def chat_content():
         st.session_state.messages.append({"role": "user", "content": prompt})
+        st.write(5)
     
     # Create a session state variable to store the chat messages. This ensures that the
     # messages persist across reruns.
@@ -37,7 +38,10 @@ with tab1:
         button_b_pos = "1rem"
         button_css = float_css_helper(width="2.2rem", bottom=button_b_pos, transition=0)
         float_parent(css=button_css)
-        
+
+    st.write(6)
+    st.write(prompt)
+    
     if prompt:
         st.write(2)
         with st.chat_message("user"):
