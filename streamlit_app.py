@@ -17,13 +17,6 @@ with tab1:
     st.write(
     "API for RagoonBot, a custom snowflake mistral model version 0.1"
     )
-
-    # def chat_content():
-    #     st.session_state.messages.append({"role": "user", "content": prompt})
-    #     with st.chat_message("user"):
-    #         st.markdown(prompt)
-    #         st.write(3)
-    #     st.write(5)
     
     # Create a session state variable to store the chat messages. This ensures that the
     # messages persist across reruns.
@@ -37,28 +30,21 @@ with tab1:
         
     with st.container():
         prompt = st.chat_input(placeholder='What can I help you today?', key=1) 
-        st.write(1)
         button_b_pos = "1rem"
         button_css = float_css_helper(width="2.2rem", bottom=button_b_pos, transition=0)
         float_parent(css=button_css)
-
-    st.write(6)
-    st.write(prompt)
     
     if prompt:
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
-            st.write(3)
             
-        st.write(2)
         url = 'https://ragoooon.onrender.com/stream_complete'
         myobj = {"prompt": prompt,"history": []}
         stream = requests.post(url, json = myobj)
         
         # Stream the response to the chat using `st.write_stream`, then store it in 
         # session state.
-        
         def stream_data():
             for word in stream.json()['stream']:
                 yield word
@@ -85,11 +71,15 @@ with tab2:
     for message1 in st.session_state.messages1:
         with st.chat_message(message1["role"]):
             st.markdown(message1["content"])
-    
-    # Create a chat input field to allow the user to enter a message. This will display
-    # automatically at the bottom of the page.
-    if prompt1 := st.chat_input("What can I help you today?", key=2):
-    
+
+    with st.container():
+        prompt1 = st.chat_input(placeholder='What can I help you today?', key=2) 
+        st.write(1)
+        button_b_pos = "1rem"
+        button_css = float_css_helper(width="2.2rem", bottom=button_b_pos, transition=0)
+        float_parent(css=button_css)
+        
+    if prompt1:    
         # Store and display the current prompt.
         st.session_state.messages1.append({"role": "user", "content": prompt1})
         with st.chat_message("user"):
@@ -128,11 +118,15 @@ with tab3:
     for message2 in st.session_state.messages2:
         with st.chat_message(message2["role"]):
             st.markdown(message2["content"])
-    
-    # Create a chat input field to allow the user to enter a message. This will display
-    # automatically at the bottom of the page.
-    if prompt2 := st.chat_input("What can I help you today?", key=3):
-    
+
+    with st.container():
+        prompt2 = st.chat_input(placeholder='What can I help you today?', key=3) 
+        st.write(1)
+        button_b_pos = "1rem"
+        button_css = float_css_helper(width="2.2rem", bottom=button_b_pos, transition=0)
+        float_parent(css=button_css)
+        
+    if prompt2:
         # Store and display the current prompt.
         st.session_state.messages2.append({"role": "user", "content": prompt2})
         with st.chat_message("user"):
