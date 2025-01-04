@@ -10,52 +10,47 @@ st.title("💬 Ragooon")
 tab1, tab2, tab3 = st.tabs(["Snowflake Mistral AI /stream_complete", "Testing AI", "/stream_chat"])
 
 # SNOWFLAKE MISTRAL TAB
-with tab1:
-    # Show title and description.
-    st.title("💬 Ragooon Chatbot")
-    st.write(
-        "API for RagoonBot, a custom snowflake mistral model version 0.1"
-    )
-        
-    # Create a session state variable to store the chat messages. This ensures that the
-    # messages persist across reruns.
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
+# with tab1:
+# Show title and description.
+st.title("💬 Ragooon Chatbot")
+st.write(
+"API for RagoonBot, a custom snowflake mistral model version 0.1"
+)
 
-    # Display existing chat messages.
-    chat_container = st.container()  # Create a container for the chat history.
-    with chat_container:
-        for message in st.session_state.messages:
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
+# Create a session state variable to store the chat messages. This ensures that the
+# messages persist across reruns.
+if "messages" not in st.session_state:
+st.session_state.messages = []
 
-    input_container = st.empty()
+# Display existing chat messages.
+for message in st.session_state.messages:
+with st.chat_message(message["role"]):
+    st.markdown(message["content"])
+    
+# Create a chat input field to allow the user to enter a message. This will display
+# automatically at the bottom of the page.
+if prompt := st.chat_input("What can I help you today?", key=1):
 
-    with input_container:
-    # Create a chat input field to allow the user to enter a message. This will display
-    # automatically at the bottom of the page.
-        if prompt := st.chat_input("What can I help you today?", key=1):
-        
-            # Store and display the current prompt.
-            # st.session_state.messages.append({"role": "user", "content": prompt})
-            # with st.chat_message("user"):
-            #     st.markdown(prompt)
-        
-            url = 'https://ragoooon.onrender.com/stream_complete'
-            myobj = {"prompt": prompt,"history": []}
-            stream = requests.post(url, json = myobj)
-            
-            # Stream the response to the chat using `st.write_stream`, then store it in 
-            # session state.
-            
-            def stream_data():
-                for word in stream.json()['stream']:
-                    yield word
-                    time.sleep(0.02)
-            
-            with st.chat_message("assistant"):
-                response = st.write_stream(stream_data)
-            st.session_state.messages.append({"role": "assistant", "content": response})
+# Store and display the current prompt.
+st.session_state.messages.append({"role": "user", "content": prompt})
+with st.chat_message("user"):
+    st.markdown(prompt)
+
+url = 'https://ragoooon.onrender.com/stream_complete'
+myobj = {"prompt": prompt,"history": []}
+stream = requests.post(url, json = myobj)
+
+# Stream the response to the chat using `st.write_stream`, then store it in 
+# session state.
+
+def stream_data():
+    for word in stream.json()['stream']:
+        yield word
+        time.sleep(0.02)
+
+with st.chat_message("assistant"):
+    response = st.write_stream(stream_data)
+st.session_state.messages.append({"role": "assistant", "content": response})
     
 # TESTING AI TAB
 with tab2:
