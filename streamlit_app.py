@@ -33,14 +33,18 @@ with tab1:
         
     with st.container():
         prompt = st.chat_input(placeholder='What can I help you today?', on_submit=chat_content, key=1) 
+        st.write(1)
         button_b_pos = "0rem"
         button_css = float_css_helper(width="2.2rem", bottom=button_b_pos, transition=0)
         float_parent(css=button_css)
         
     if prompt:
+        st.write(2)
         with st.chat_message("user"):
             st.markdown(prompt)
-    
+            st.write(3)
+
+        st.write(4)
         url = 'https://ragoooon.onrender.com/stream_complete'
         myobj = {"prompt": prompt,"history": []}
         stream = requests.post(url, json = myobj)
