@@ -34,7 +34,7 @@ with tab1:
     with st.container():
         prompt = st.chat_input(placeholder='What can I help you today?', on_submit=chat_content, key=1) 
         st.write(1)
-        button_b_pos = "0rem"
+        button_b_pos = "1rem"
         button_css = float_css_helper(width="2.2rem", bottom=button_b_pos, transition=0)
         float_parent(css=button_css)
         
