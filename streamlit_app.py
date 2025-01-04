@@ -31,26 +31,26 @@ with st.chat_message(message["role"]):
 # automatically at the bottom of the page.
 if prompt := st.chat_input("What can I help you today?", key=1):
 
-# Store and display the current prompt.
-st.session_state.messages.append({"role": "user", "content": prompt})
-with st.chat_message("user"):
-    st.markdown(prompt)
-
-url = 'https://ragoooon.onrender.com/stream_complete'
-myobj = {"prompt": prompt,"history": []}
-stream = requests.post(url, json = myobj)
-
-# Stream the response to the chat using `st.write_stream`, then store it in 
-# session state.
-
-def stream_data():
-    for word in stream.json()['stream']:
-        yield word
-        time.sleep(0.02)
-
-with st.chat_message("assistant"):
-    response = st.write_stream(stream_data)
-st.session_state.messages.append({"role": "assistant", "content": response})
+    # Store and display the current prompt.
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.markdown(prompt)
+    
+    url = 'https://ragoooon.onrender.com/stream_complete'
+    myobj = {"prompt": prompt,"history": []}
+    stream = requests.post(url, json = myobj)
+    
+    # Stream the response to the chat using `st.write_stream`, then store it in 
+    # session state.
+    
+    def stream_data():
+        for word in stream.json()['stream']:
+            yield word
+            time.sleep(0.02)
+    
+    with st.chat_message("assistant"):
+        response = st.write_stream(stream_data)
+    st.session_state.messages.append({"role": "assistant", "content": response})
     
 # TESTING AI TAB
 with tab2:
