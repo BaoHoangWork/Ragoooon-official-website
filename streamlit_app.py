@@ -21,7 +21,14 @@ def set_language(language: str):
 
 # Sidebar for language selection
 st.sidebar.title("Language Selector")
-language = st.sidebar.selectbox("Choose language", ["en", "vn"])
+if "language" not in st.session_state:
+        st.session_state.language = "en"
+language = st.sidebar.selectbox(
+    "Choose language", 
+    ["en", "es", "vn"], 
+    index=["en", "es"].index(st.session_state.language),
+    key="language"
+)
 
 # Load the chosen language
 _ = set_language(language)
