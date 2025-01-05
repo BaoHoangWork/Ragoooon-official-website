@@ -3,6 +3,31 @@ import requests
 import json
 import time
 from streamlit_float import *
+import gettext
+
+# Setup translation
+def set_language(language: str):
+    """Set the language for gettext."""
+    locales_dir = os.path.join(os.path.dirname(__file__), "locales")
+    try:
+        lang_translations = gettext.translation("messages", locales_dir, languages=[language])
+        lang_translations.install()
+        return lang_translations.gettext
+    except FileNotFoundError:
+        # Fallback to default (English)
+        gettext.install("messages", locales_dir)
+        return gettext.gettext
+
+# Sidebar for language selection
+st.sidebar.title("Language Selector")
+language = st.sidebar.selectbox("Choose language", ["en", "vn"])
+
+# Load the chosen language
+_ = set_language(language)
+
+# App content
+st.title(_("Welcome to My Streamlit App"))
+st.write(_("This app demonstrates how to use gettext for translations."))
 
 st.title("💬 Ragooon")
 float_init(theme=True, include_unstable_primary=False)
