@@ -23,15 +23,20 @@ def set_language(language: str):
 st.sidebar.title("Language Selector")
 if "language" not in st.session_state:
         st.session_state.language = "en"
-language = st.sidebar.selectbox(
+selected_language = st.sidebar.selectbox(
     "Choose language", 
     ["en", "es", "vn"], 
     index=["en", "es", "vn"].index(st.session_state.language),
     key="language"
 )
 
-# Load the chosen language
-_ = set_language(language)
+# Update language in session state
+if st.session_state.language != selected_language:
+    st.session_state.language = selected_language
+    st.experimental_rerun()
+
+# Load translations dynamically for the selected language
+_ = set_language(st.session_state.language)
 
 # App content
 st.title(_("Welcome to My Streamlit App"))
