@@ -26,7 +26,7 @@ if "language" not in st.session_state:
 language = st.sidebar.selectbox(
     "Choose language", 
     ["en", "es", "vn"], 
-    index=["en", "es"].index(st.session_state.language),
+    index=["en", "es", "vn"].index(st.session_state.language),
     key="language"
 )
 
