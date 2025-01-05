@@ -88,7 +88,7 @@ with tab2:
         st.session_state.messages1 = []
     
     # Display the existing chat messages via `st.chat_message`.
-    for message1 in st.session_state.messages2:
+    for message1 in st.session_state.messages1:
         with st.chat_message(message1["role"]):
             st.markdown(message1["content"])
 
