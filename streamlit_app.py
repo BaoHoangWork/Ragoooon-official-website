@@ -4,6 +4,7 @@ import json
 import time
 from streamlit_float import *
 import gettext
+import os
 
 # Setup translation
 def set_language(language: str):
