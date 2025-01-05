@@ -28,7 +28,7 @@ st.title("💬 Ragooon")
 float_init(theme=True, include_unstable_primary=False)
 
 # tab setups
-tab1, tab2 = st.tabs(["Snowflake Mistral AI /stream_complete", "/stream_chat", "/rag_stream_complete"])
+tab1, tab2, tab3 = st.tabs(["Snowflake Mistral AI /stream_complete", "/stream_chat", "/rag_stream_complete"])
 
 # SNOWFLAKE MISTRAL TAB
 with tab1:
