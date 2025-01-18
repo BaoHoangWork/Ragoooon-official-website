@@ -4,7 +4,6 @@ import json
 import time
 from datetime import datetime
 import logging
-import tiktoken
 from streamlit_float import *
 from deep_translator import GoogleTranslator
 from streamlit_extras.stylable_container import stylable_container
