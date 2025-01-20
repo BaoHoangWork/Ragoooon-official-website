@@ -3,3 +3,7 @@ streamlit-float
 deep_translator
 streamlit-mic-recorder
 streamlit-extras
+streamlit_js_eval
+streamlit_geolocation
+streamlit-folium
+folium
