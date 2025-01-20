@@ -125,17 +125,17 @@ with chat_container:
         # Store and display the current prompt.
         st.session_state.messages.append({"role": "user", "content": prompt})
 
-        st.markdown(
-            """
-        <style>
-            .st-emotion-cache-janbn0 {
-                flex-direction: row-reverse;
-                text-align: right;
-            }
-        </style>
-        """,
-            unsafe_allow_html=True,
-        )
+        # st.markdown(
+        #     """
+        # <style>
+        #     .st-emotion-cache-janbn0 {
+        #         flex-direction: row-reverse;
+        #         text-align: right;
+        #     }
+        # </style>
+        # """,
+        #     unsafe_allow_html=True,
+        # )
 
         with st.chat_message("user"):
             st.markdown(prompt)
