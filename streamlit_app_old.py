@@ -8,10 +8,6 @@ from streamlit_float import *
 from deep_translator import GoogleTranslator
 from streamlit_extras.stylable_container import stylable_container
 from streamlit_mic_recorder import speech_to_text
-from streamlit_geolocation import streamlit_geolocation
-import streamlit_js_eval
-import folium
-from streamlit_folium import st_folium
 
 logger = logging.getLogger()
 logging.basicConfig(encoding="UTF-8", level=logging.INFO)
@@ -29,21 +25,6 @@ language_mapping = {
     "Korean": "ko"
 }
 float_init(theme=True, include_unstable_primary=False)
-
-location_string = streamlit_js_eval.get_geolocation() 
-
-def prompt_location():
-    latitude = ""
-    longitude = ""
-
-    if location_string is None:
-        st.toast('Please allow location access and reload the page for this feature 🗺️')
-        return None
-    else:
-        latitude = location_string["coords"]["latitude"]
-        longitude = location_string["coords"]["longitude"]
-        return [latitude, longitude]
-
 
 if "language" not in st.session_state:
     st.session_state.language = "English"
@@ -70,45 +51,39 @@ if st.session_state.language != selected_language:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-mic_buttons_container = st.container()
-mic_buttons_container.float("bottom: 3rem;")
+if 'text_received' not in st.session_state:
+    st.session_state.text_received = []
 
-col7, col8, col9 = mic_buttons_container.columns([0.8, 0.1, 0.1], gap="small")
-with col7:
-    prompt = st.chat_input(placeholder='What can I help you today?', key=1) 
-with col8:
-    text = speech_to_text(
-        language=language_mapping[st.session_state.language], 
-        use_container_width=True, 
-        just_once=True, 
-        key='STT',
-        start_prompt="🎤", 
-        stop_prompt="🗣️"
-    )
+with st.container():
+    # prompt = st.chat_input(placeholder='What can I help you today?', key=1) 
+    button_b_pos = "1rem"
+    button_css = float_css_helper(bottom=button_b_pos, transition=0)
+    float_parent(css=button_css)
 
-    if text:
-        prompt = text
-with col9:
-    icon = "📍"
+    mic_buttons_container = st.container()
+    mic_buttons_container.float("bottom: 3rem;background-color: var(--default-backgroundColor);")
 
-    # The button will trigger the logging function
-    if st.button(icon):
-        location_return = prompt_location()
+    col7, col8 = mic_buttons_container.columns([0.7, 0.3], gap="large")
+    with col7:
+        prompt = st.chat_input(placeholder='What can I help you today?', key=1) 
+    with col8:
+        text = speech_to_text(
+            language=language_mapping[st.session_state.language], 
+            use_container_width=False, 
+            just_once=True, 
+            key='STT',
+            start_prompt="🎤", 
+            stop_prompt="🗣️"
+        )
 
-        if location_return is not None:
-            location_value = 'latitude: ' + str(location_return[0]) + ' , longitude: ' + str(location_return[1])
-            prompt = "My location is " + location_value + ", find attrations near me"
-        
+        if text:
+            # st.session_state.text_received.append(text)
+            prompt = text
+            # st.session_state.text_received = []
+    
+    st.caption("<div style='text-align: center; margin-bottom: 1rem'> Ragooon can make mistakes. Check important info. </div>", unsafe_allow_html=True)
 
-caption_container = st.container()
-caption_container.float("bottom: 1rem")
-caption_container.caption("<div style='text-align: center; margin-bottom: 1rem'>" + _('Ragooon can make mistakes. Check important info.') +  "</div>", unsafe_allow_html=True)
-
-# st.caption("<div style='text-align: center; margin-bottom: 1rem'>" + _('Ragooon can make mistakes. Check important info.') +  "</div>", unsafe_allow_html=True)
-
-chat_container = st.container()
-chat_container.float("top: 5rem; height: 71vh; overflow-y: scroll; overflow-x: hidden; padding-bottom: 5vh; padding-right: 1vh")
-with chat_container:
+with st.container(height=600, border=False):
     st.title("❄️ Ragoon ❄️")
     st.subheader(_("Your personal pocket guide dog 🦮"))
 
@@ -142,7 +117,7 @@ with chat_container:
 
         url = 'https://ragoooon.onrender.com/stream_rag'
         myobj = {"prompts": prompt, "history": st.session_state.messages}
-        with st.spinner('Ragoon ' + _('is finding the way...')):
+        with st.spinner('Ragooon is finding the way...'):
             stream = requests.post(url, json = myobj)
         
         # Stream the response to the chat using `st.write_stream`, then store it in 
@@ -153,7 +128,7 @@ with chat_container:
                 yield word
                 time.sleep(0.01)
 
-        with st.chat_message("assistant"):
+        with st.chat_message("ragoon", avatar="🐶"):
             with stylable_container(
                 "codeblock",
                 """
@@ -163,7 +138,7 @@ with chat_container:
                 """,
             ):
                 response = st.write_stream(stream_data)
-        
+
         st.session_state.messages.append({"role": "assistant", "content": response})
 
 # This function logs the last question and answer in the chat messages
@@ -191,8 +166,8 @@ if len(st.session_state["messages"]) > 0:
     action_buttons_container.float("bottom: 6.9rem;background-color: var(--default-backgroundColor); padding-top: 1rem;")
 
     # We set the space between the icons thanks to a share of 100
-    cols_dimensions = [7, 19.4, 19.3, 9, 8.6, 8.6, 28.1] # add column 28.1
-    col0, col1, col2, col3, col4, col5, col6 = action_buttons_container.columns(cols_dimensions)
+    cols_dimensions = [7, 19.4, 19.3, 9, 8.6, 8.6] # add column 28.1
+    col0, col1, col2, col3, col4, col5= action_buttons_container.columns(cols_dimensions)
 
     with col1:
         # Converts the list of messages into a JSON Bytes format
@@ -232,19 +207,3 @@ if len(st.session_state["messages"]) > 0:
         # The button will trigger the logging function
         if st.button(icon):
             log_feedback(icon)
-
-    with col6:
-        location_return_1 = prompt_location()
-
-        with st.popover("Open map 🗺️", use_container_width=False):
-            if location_return_1 is not None:
-                latitude = location_return_1[0]
-                longitude = location_return_1[1]
-
-                m = folium.Map(location=[latitude, longitude], zoom_start=32)
-                folium.Marker(
-                    [latitude, longitude], popup="Your location", tooltip="Your location"
-                ).add_to(m)
-
-                # call to render Folium map in Streamlit
-                st_data = st_folium(m, width=1000)
