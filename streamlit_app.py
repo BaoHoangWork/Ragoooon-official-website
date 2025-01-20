@@ -241,7 +241,7 @@ if len(st.session_state["messages"]) > 0:
                 latitude = location_return_1[0]
                 longitude = location_return_1[1]
 
-                m = folium.Map(location=[latitude, longitude], zoom_start=32)
+                m = folium.Map(location=[latitude, longitude], zoom_start=48)
                 folium.Marker(
                     [latitude, longitude], popup="Your location", tooltip="Your location"
                 ).add_to(m)
