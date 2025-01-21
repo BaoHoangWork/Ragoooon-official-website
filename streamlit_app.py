@@ -75,7 +75,7 @@ mic_buttons_container.float("bottom: 3rem;")
 
 col7, col8, col9 = mic_buttons_container.columns([0.8, 0.1, 0.1], gap="small")
 with col7:
-    prompt = st.chat_input(placeholder='What can I help you today?', key=1) 
+    prompt = st.chat_input(placeholder=_('What can I help you today?'), key=1) 
 with col8:
     text = speech_to_text(
         language=language_mapping[st.session_state.language], 
