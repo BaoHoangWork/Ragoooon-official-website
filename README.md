@@ -26,12 +26,11 @@ Embark on smarter, funnier, and more unforgettable adventures with **Ragoooon** 
 
 - **Website:** https://ragoooon-official-website.streamlit.app/
 - **GitHub:** https://github.com/Tsun0193/Ragoooon
-- **Support:**
-  <p align="left">
+- **Support:** <p align="left">
     <a href="https://github.com/Tsun0193" target="blank">Tsun0193</a>
     <a href="https://github.com/Woofy2205" target="blank">Woofy2205</a>
     <a href="https://github.com/probe741" target="blank">probe741</a>
     <a href="https://github.com/baohoangwork" target="blank">BaoHoangWork</a>
 </p>
-
+  
 Stay tuned for updates and join our community of adventurous travelers today!
