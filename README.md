@@ -20,8 +20,9 @@ Embark on smarter, funnier, and more unforgettable adventures with **Ragoooon** 
 
 **Pack your bags, charge your device, and let the good times roll with Ragoooon!**
 
-### **Brief Presentation** & **Project Information**
+### 🌐 **Brief Presentation** & **Project Information**
 [Ragoon](https://devpost.com/software/ragoooon?_gl=1*az2qas*_gcl_au*MTgxODY3Nzk1NC4xNzQxNjYxNDk0*_ga*MTk1Mjg4NDE3OC4xNzQxNjYxNDk1*_ga_0YHJK3Y10M*MTc0MTY2MTQ5NC4xLjEuMTc0MTY2MTUxMC4wLjAuMA..) on Devpost
+
 ---
 
 **Connect with Us:**
